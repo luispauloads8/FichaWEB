@@ -1,0 +1,80 @@
+﻿@model EM.Domain.Aluno
+
+@{
+    ViewData["Title"] = "Cadastrar Aluno";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+@if (TempData["matriculaobrigatoria"] != null)
+{
+    <div class="alert alert-success">@TempData["matriculaobrigatoria"]</div>
+}
+
+@if (TempData["cpfduplicado"] != null)
+{
+    <div class="alert alert-success">@TempData["cpfduplicado"]</div>
+}
+
+<hr />
+<div class="row">
+    <div class="col-md-4" id="validate">
+        @using (Html.BeginForm("CadastrarAluno", "Aluno"))
+        {
+            @Html.AntiForgeryToken()
+
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+
+            <input type="hidden" asp-for="Matricula" />
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Matricula, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input asp-for="Matricula" class="form-control" value=@ViewBag.DadosMatricula name="matricula" id="matricula" maxlength="9" />
+                    @Html.ValidationMessageFor(m => m.Matricula, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Nome, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+
+                    @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", @placeholder = "Nome", name = "nome", id = "nome" })
+                    @Html.ValidationMessageFor(m => m.Nome, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sexo" class="control-label"></label>
+                <p>
+                    @Html.EnumDropDownListFor(m => m.Sexo, new { @class = "form-control", name = "sexo", id = "sexo" })
+                </p>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Nascimento, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    <input asp-for="Nascimento" class="form-control" type="date" name="Nascimento" id="Nascimento" />
+                    @Html.ValidationMessageFor(m => m.Nascimento, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.CPF, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.CPF,
+                                       new { @class = "form-control", name = "CPF", id = "CPF",  onfocus = "javascript: retirarFormatacao(this);",  onblur = "javascript: formatarCampo(this);", maxlength = "14" })
+                    @Html.ValidationMessageFor(m => m.CPF, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Salvar" class="btn btn-success" onclick=" return validate()" />
+                <a href="@Url.Action("Index" )" title="Visualizar" class="btn btn-secondary">
+                    Retornar
+                </a>
+            </div>
+        }
+
+    </div>
+</div>
+
+
+<script type="text/javascript" src="~/Scripts/validate.js" charset="utf-8"></script>
+

@@ -1,0 +1,70 @@
+﻿@model EM.Domain.Aluno
+
+@{
+    ViewData["Title"] = "Excluir Aluno";
+}
+
+<h2>@ViewData["Title"]</h2>
+
+
+<div class="row">
+    <div class="col-md-4">
+        @using (Html.BeginForm("DeletarAluno", "Aluno"))
+        {
+            @Html.AntiForgeryToken()
+
+            @Html.ValidationSummary(true);
+            @Html.HiddenFor(m => m.Matricula)
+
+            <div class="form-group">
+                @Html.LabelFor(m => m.Matricula, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Matricula, new { @class = "form-control", disabled = "disabled", name = "matricula", id = "matricula" })
+                    @Html.ValidationMessageFor(m => m.Matricula, "", new { @class = "text-danger" })
+                    <span class='msg-erro msg-nome'></span>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Nome, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Nome, new { @class = "form-control", @placeholder = "Nome", name = "nome", id = "nome" })
+                    @Html.ValidationMessageFor(m => m.Nome, "", new { @class = "text-danger" })
+                    <span class='msg-erro msg-nome'></span>
+                </div>
+            </div>
+            <div class="form-group">
+                <label asp-for="Sexo" class="control-label"></label>
+                <p>
+                    @Html.EnumDropDownListFor(m => m.Sexo, new { @class = "form-control", name = "sexo", id = "sexo" })
+                </p>
+                <span class='msg-erro msg-nome'></span>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.Nascimento, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.Nascimento, "{0:dd/MM/yyyy}", new { @class = "form-control", name = "Nascimento", id = "Nascimento" })
+                    @Html.ValidationMessageFor(m => m.Nascimento, "", new { @class = "text-danger" })
+                    <span class='msg-erro msg-nome'></span>
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(m => m.CPF, new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.TextBoxFor(m => m.CPF, new { @class = "form-control", name = "CPF", id = "CPF" })
+                    @Html.ValidationMessageFor(m => m.CPF, "", new { @class = "text-danger" })
+                    <span class='msg-erro msg-nome'></span>
+                </div>
+            </div>
+            <br />
+            <div class="form-group">
+                <input type="submit" value="Excluir" class="btn btn-danger" onclick="return exclusao()" id="itemexcluir" />
+                <a href="@Url.Action("Index" )" title="Visualizar" class="btn btn-secondary">
+                    Retornar
+                </a>
+            </div>
+        }
+    </div>
+</div>
+
+
+<script type="text/javascript" src="~/Scripts/validate.js" charset="utf-8"></script>

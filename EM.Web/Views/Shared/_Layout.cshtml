@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>@ViewBag.Title - My ASP.NET Application</title>
+    <link rel="stylesheet" type="text/css" href="~/Content/bootstrap.min.css">
+    <style type="text/css">
+        .msg-erro {
+            color: red;
+        }
+    </style>
+    @Styles.Render("~/Content/css")
+</head>
+<body>
+
+    <div class="container body-content">
+        @RenderBody()
+        <hr />
+        <footer>
+            <p>&copy; @DateTime.Now.Year - Projeto Ficha Aluno</p>
+        </footer>
+    </div>
+</body>
+</html>
