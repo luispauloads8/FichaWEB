@@ -7,9 +7,11 @@ function validate()
 	let limitemaxnome = 100;
 	let Nascimento = document.getElementById('Nascimento').value;
 
+	//formatando data e obtendo data atual
+	let str = Nascimento;
+	let date = new Date(str.split('/').reverse().join('/'));
+	let novaData = new Date();
 
-	let data = new Date();
-	let datanasc = new Date(Nascimento);
 
 
 	//VERIFICA SE MATRICULA ESTA VAZIA
@@ -33,15 +35,15 @@ function validate()
     }
 
 	//VERIFICA SE DATA DE NASCIMENTO ESTA VAZIA
-	
 
 	if (Nascimento == "") {
 		alert('Favor informe a data de nascimento');
 		return false;
-	} else if (datanasc.getDate() >= data.getDate() && datanasc.getMonth() >= data.getMonth() && data.getFullYear() >= datanasc.getFullYear()) {
+	} else if (date > novaData) {
 		alert('Aluno nao pode ser matricula com data no futuro');
 		return false;
     }
+	
 
 	//VERIFICA SE CPF ESTA VAZIO
 	let CPF = document.getElementById('CPF').value;

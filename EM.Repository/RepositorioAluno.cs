@@ -2,6 +2,7 @@
 using FirebirdSql.Data.FirebirdClient;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Text;
@@ -88,6 +89,8 @@ namespace EM.Repository
                 try
                 {
                     string sql = "DELETE from TBALUNO where matricula = " + obj.Matricula;
+                    //const string sql = "DELETE FROM TBALUNO WHERE MATRICULA = @MATRICULA AND NOME = @NOME AND CPF = @CPF AND NASCIMENTO = @NASCIMENTO AND SEXO = @ SEXO";
+                    DbCommand cmd = conexao.CreateCommand();
                     FbCommand data = new FbCommand(sql, conexao);
                     data.ExecuteNonQuery();
                 }
